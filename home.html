@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>The Smartest Real Estate Platform - Snaplist</title>
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+	<script src="https://cdn.tailwindcss.com"></script>
+	<script>
+		tailwind.config = {
+		theme: {
+		extend: {
+		fontFamily: {
+		sans: ['Poppins', 'sans-serif'],
+		},
+		colors: {
+		primary: '#2563eb',
+		secondary: '#eff6ff',
+		'accent-start': '#3b82f6',
+		'accent-end': '#60a5fa',
+		'neutral-100': '#ffffff',
+		'neutral-200': '#f1f5f9',
+		'text-primary': '#0f172a',
+		'text-secondary': '#475569',
+		},
+		},
+		},
+		};
+	</script>
+
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="wwwroot/css/site.css" />
+	<link rel="stylesheet" href="wwwroot/Snaplist.styles.css" />
+    <style>
+        /* Custom animations for the wow factor */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        .animate-float-delayed {
+            animation: float 6s ease-in-out 3s infinite;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+        .bento-card {
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .bento-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px -10px rgba(0,0,0,0.1);
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #4F46E5, #9333EA);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .whatsapp-bg {
+            background: radial-gradient(circle at top right, #dcf8c6, #ffffff);
+        }
+        /* Comparison Slider Range Thumb */
+        #comparison-slider {
+            -webkit-appearance: none;
+            appearance: none;
+            background: transparent;
+        }
+        #comparison-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 50px;
+            height: 500px;
+            background: transparent;
+            cursor: ew-resize;
+        }
+        #comparison-slider::-moz-range-thumb {
+            width: 50px;
+            height: 500px;
+            background: transparent;
+            cursor: ew-resize;
+            border: none;
+        }
+    </style>
+</head>
+<body class="relative text-text-primary font-sans bg-[#fafafa] bg-fixed bg-center bg-cover bg-no-repeat" style="min-height: 100vh;">
+	<!-- Decorative Background blobs -->
+	<div class="fixed inset-0 overflow-hidden z-0 pointer-events-none">
+		<div class="absolute -top-[20%] -left-[10%] w-[50%] h-[50%] rounded-full bg-indigo-200/40 blur-3xl opacity-60"></div>
+		<div class="absolute top-[20%] -right-[10%] w-[40%] h-[60%] rounded-full bg-purple-200/40 blur-3xl opacity-60"></div>
+	</div>
+	<header class="bg-white bg-opacity-80 backdrop-blur-md border-b border-neutral-200 shadow-md sticky top-0 z-50">
+		<nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex items-center justify-between">
+			<!-- Logo -->
+			<a href="home.html" class="flex items-center">
+				<img src="https://pub-5b323ad3d63d4299972a317d630fb8c2.r2.dev/assets/logo-white.png" alt="Snaplist Logo" class="h-8 w-auto" />
+			</a>
+
+            <div class="flex items-center sm:hidden gap-4 text-lg font-medium ml-auto">
+                <a href="about.html" class="text-text-secondary hover:text-primary transition duration-200">
+                    About Us
+                </a>
+                <!-- Register -->
+                <a href="#" class="text-text-secondary hover:text-primary transition duration-200">
+                    Register
+                </a>
+                <!-- Login -->
+                <a href="#" class="bg-gradient-to-r from-accent-start to-accent-end text-white px-3 py-0.5 rounded-xl shadow hover:opacity-90 transition-all duration-300 font-medium">
+                    Login
+                </a>
+                <!-- Hamburger -->
+                <button id="menu-toggle" class="flex flex-col justify-center items-center w-8 h-8 group">
+                    <span class="w-6 h-0.5 mb-1 bg-primary transition-transform duration-300 ease-in-out group-[.open]:rotate-45 group-[.open]:translate-y-1.5"></span>
+                    <span class="w-6 h-0.5 mb-1 bg-primary transition-opacity duration-300 ease-in-out group-[.open]:opacity-0"></span>
+                    <span class="w-6 h-0.5 bg-primary transition-transform duration-300 ease-in-out group-[.open]:-rotate-45 group-[.open]:-translate-y-1.5"></span>
+                </button>
+            </div>
+
+			<div id="menu"
+				 class="hidden sm:flex sm:items-center absolute sm:static left-0 right-0 top-full sm:top-auto bg-white sm:bg-transparent shadow-md sm:shadow-none sm:rounded-none px-6 py-4 sm:p-0 transition-all duration-300 origin-top scale-y-0 sm:scale-y-100 sm:opacity-100 h-screen sm:h-auto overflow-y-auto z-40">
+
+				<div class="flex flex-col sm:flex-row w-full sm:w-auto items-start sm:items-center gap-4 sm:gap-6 text-lg font-medium">
+                    <a href="about.html" class="text-text-secondary hover:text-primary transition duration-200">
+                        About Us
+                    </a>
+                    <a href="#" class="text-text-secondary hover:text-primary transition duration-200">
+                        Register
+                    </a>
+                    <a href="#" class="bg-gradient-to-r from-accent-start to-accent-end text-white px-3 py-0.5 rounded-xl shadow hover:opacity-90 transition-all duration-300 font-medium">
+                        Login
+                    </a>
+				</div>
+			</div>
+		</nav>
+	</header>
+	<div class="relative z-10 max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 mt-2">
+		<main role="main" class="pb-16">
+			
+            <div class="min-h-screen text-gray-900 font-sans overflow-hidden">
+                <div class="relative z-10 px-6 pt-0 pb-24 w-full">
+                    
+                    <!-- Hero Section -->
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center pt-8">
+                        <div class="space-y-8 relative z-20">
+                            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-600 text-sm font-semibold tracking-wide shadow-sm">
+                                <span class="flex h-2 w-2 relative">
+                                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
+                                  <span class="relative inline-flex rounded-full h-2 w-2 bg-indigo-500"></span>
+                                </span>
+                                Introducing AI-Powered Listings
+                            </div>
+                            
+                            <h1 class="text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.1] text-gray-900">
+                                Sell properties <br/>
+                                <span class="gradient-text">faster & smarter</span>
+                            </h1>
+                            
+                            <p class="text-xl text-gray-500 leading-relaxed max-w-lg">
+                                Upload pictures and brochures. We use AI to enhance images, create a stunning property page, and integrate WhatsApp to engage leads—all in seconds.
+                            </p>
+                            
+                            <div class="flex flex-col sm:flex-row gap-4 pt-4">
+                                <a href="#" class="px-8 py-4 bg-gray-900 text-white rounded-full font-semibold text-lg shadow-xl shadow-gray-900/20 hover:bg-gray-800 transition-all flex items-center justify-center gap-2 group">
+                                    Get Started Free
+                                    <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                                </a>
+                                <a href="#features" class="px-8 py-4 bg-white text-gray-800 border border-gray-200 rounded-full font-semibold text-lg hover:bg-gray-50 transition-all flex items-center justify-center">
+                                    Explore Features
+                                </a>
+                            </div>
+                            
+                            <div class="pt-8 flex items-center gap-4 text-sm font-medium text-gray-500">
+                                <div class="flex -space-x-3">
+                                    <img src="https://i.pravatar.cc/100?img=11" class="w-10 h-10 rounded-full border-2 border-white shadow-sm"/>
+                                    <img src="https://i.pravatar.cc/100?img=12" class="w-10 h-10 rounded-full border-2 border-white shadow-sm"/>
+                                    <img src="https://i.pravatar.cc/100?img=13" class="w-10 h-10 rounded-full border-2 border-white shadow-sm"/>
+                                    <img src="https://i.pravatar.cc/100?img=14" class="w-10 h-10 rounded-full border-2 border-white shadow-sm"/>
+                                </div>
+                                <div>Join 2,000+ top agents</div>
+                            </div>
+                        </div>
+
+                        <!-- Hero Graphics -->
+                        <div class="relative h-[450px] sm:h-[500px] lg:h-[600px] flex items-center justify-center mt-10 lg:mt-0">
+                            <!-- Main Image -->
+                            <div class="absolute z-10 w-[80%] aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl shadow-indigo-500/20 transform rotate-[-2deg] animate-float">
+                                <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=80" alt="Luxury Home" class="w-full h-full object-cover" />
+                                <div class="absolute bottom-6 left-6 right-6 glass-card p-4 rounded-2xl flex items-center gap-4">
+                                    <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-lg text-green-500 text-xl flex-shrink-0">
+                                        <i class="fab fa-whatsapp"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm text-gray-800 font-bold">New Lead Attempt</p>
+                                        <p class="text-xs text-gray-600 line-clamp-1">"I'd like to book a viewing for tomorrow."</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Secondary Image Floating -->
+                            <div class="absolute z-20 top-10 -right-4 w-[45%] aspect-square rounded-3xl overflow-hidden shadow-xl shadow-purple-500/20 transform rotate-[6deg] animate-float-delayed border-4 border-white">
+                                <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=500&q=80" alt="Modern Interior" class="w-full h-full object-cover" />
+                                <div class="absolute top-2 right-2 bg-indigo-600 text-white text-[10px] uppercase font-bold px-2 py-1 rounded-full shadow-md">AI Enhanced</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- AI Comparison Section -->
+                    <div class="mt-20 mb-20 text-center">
+                        <h2 class="text-4xl md:text-5xl font-bold mb-6">Unfair Advantage with <span class="gradient-text">AI Styling</span></h2>
+                        <p class="text-xl text-gray-500 max-w-2xl mx-auto mb-16">Remove clutter, add virtual furniture, and perfect the lighting with a single click. Turn everyday snapshots into premium listings.</p>
+                        
+                        <div class="relative max-w-5xl mx-auto rounded-[2rem] overflow-hidden shadow-2xl group border-[8px] border-white bg-gray-100" id="comparison-container">
+                            <div class="relative h-[300px] md:h-[500px] w-full select-none">
+                                <!-- Base Layer (After AI) -->
+                                <img src="https://pub-5b323ad3d63d4299972a317d630fb8c2.r2.dev/assets/before.jpg" class="absolute inset-0 w-full h-full object-cover pointer-events-none select-none" alt="After AI" draggable="false" />
+                                <div class="absolute top-4 right-4 md:top-6 md:right-6 glass-card px-3 py-1.5 md:px-4 md:py-2 rounded-full text-xs md:text-sm font-bold text-gray-800 shadow flex items-center gap-2 z-0 pointer-events-none">
+                                    <span class="w-2 h-2 rounded-full bg-red-500"></span> Original
+                                </div>
+
+                                <!-- Overlay Layer (Before AI) -->
+                                <div class="absolute inset-0 z-10 select-none pointer-events-none" style="clip-path: inset(0 50% 0 0);" id="before-image-layer">
+                                    <img src="https://pub-5b323ad3d63d4299972a317d630fb8c2.r2.dev/assets/after.jpeg" class="absolute inset-0 w-full h-full object-cover pointer-events-none select-none" alt="Before AI" draggable="false" />
+                                    <div class="absolute top-4 left-4 md:top-6 md:left-6 glass-card px-3 py-1.5 md:px-4 md:py-2 rounded-full text-xs md:text-sm font-bold text-gray-700 shadow flex items-center gap-2">
+                                        <span class="w-2 h-2 rounded-full bg-green-500"></span> AI Enhanced
+                                    </div>
+                                </div>
+                                
+                                <!-- Decorative Divider / Slider Handle -->
+                                <div class="absolute left-1/2 top-0 bottom-0 w-1 bg-white shadow-[0_0_15px_rgba(0,0,0,0.5)] transform -translate-x-1/2 flex items-center justify-center z-20 pointer-events-none" id="slider-handle">
+                                    <div class="w-8 h-8 md:w-10 md:h-10 bg-white rounded-full shadow-xl flex items-center justify-center text-indigo-600 border border-gray-100">
+                                        <i class="fas fa-arrows-alt-h text-sm md:text-base"></i>
+                                    </div>
+                                </div>
+
+                                <!-- Native invisible slider -->
+                                <input type="range" min="0" max="100" value="50" class="absolute inset-0 w-full h-full opacity-0 z-30 cursor-ew-resize m-0 p-0" id="comparison-slider" aria-label="Image comparison slider" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bento Grid Features -->
+                    <div id="features" class="mt-20 pt-10">
+                        <div class="mb-12 text-center md:text-left">
+                            <h2 class="text-4xl md:text-5xl font-bold leading-tight">Everything you need. <br/> <span class="text-gray-400">Nothing you don't.</span></h2>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:auto-rows-[340px]">
+                            
+                            <!-- BENTO 1: WhatsApp (Large) -->
+                            <div class="bento-card md:col-span-2 md:row-span-2 rounded-[2rem] p-8 md:p-12 relative overflow-hidden flex flex-col md:flex-row justify-between" style="background: radial-gradient(circle at top right, #e8f9f2, #f3fdf9);">
+                                <div class="relative z-10 md:w-1/2 md:max-w-sm mb-12 md:mb-0">
+                                    <div class="w-14 h-14 bg-green-100 text-green-600 rounded-2xl flex items-center justify-center text-3xl mb-6 shadow-sm">
+                                        <i class="fab fa-whatsapp"></i>
+                                    </div>
+                                    <h3 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">24/7 WhatsApp AI Agent</h3>
+                                    <p class="text-gray-600 text-lg leading-relaxed">Never miss a lead. Our AI chatbot handles inquiries, captures leads, understands voice notes, and books appointments directly on WhatsApp.</p>
+                                </div>
+                                
+                                <!-- WhatsApp Mockup Graphic -->
+                                <div class="relative md:absolute md:-bottom-10 md:-right-10 w-[95%] mx-auto md:mx-0 sm:w-[60%] md:w-[50%] lg:w-[45%] bg-cover bg-center rounded-t-3xl shadow-2xl border-4 border-gray-100/50 transform md:rotate-[-3deg] rotate-0 mt-auto -mb-12 md:mb-0" style="aspect-ratio: 9/16; background-image: url('https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=400&q=80');">
+                                    <div class="absolute inset-0 bg-[#ebebeb] overflow-hidden rounded-t-2xl flex flex-col">
+                                        <div class="bg-[#075e54] text-white p-4 flex items-center gap-3 shadow-sm z-10">
+                                            <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center text-lg"><i class="fas fa-robot"></i></div>
+                                            <div><div class="text-sm font-bold">Property Bot</div><div class="text-[10px] text-white/80">Online</div></div>
+                                        </div>
+                                        <div class="p-4 flex-1 space-y-4 flex flex-col bg-[#efe7dd] bg-opacity-90 whatsapp-bg">
+                                            <div class="bg-white p-3 rounded-xl rounded-tl-none self-start shadow-sm text-xs max-w-[85%] text-gray-800 relative">
+                                                Hi! I'm interested in the 4-bed villa. Is it still available? 🎤 <span class="italic text-gray-500">(Voice note)</span>
+                                            </div>
+                                            <div class="bg-[#dcf8c6] p-3 rounded-xl rounded-tr-none self-end shadow-sm text-xs max-w-[85%] text-gray-800 relative">
+                                                Yes, it's available! I've booked a viewing for you tomorrow at 4 PM. Your agent will contact you shortly. 🏡
+                                                <div class="absolute bottom-1 right-2 text-[10px] text-gray-500"><i class="fas fa-check-double text-blue-500"></i></div>
+                                            </div>
+                                            <div class="bg-white p-3 rounded-xl rounded-tl-none self-start shadow-sm text-xs max-w-[85%] text-gray-800 border-l-4 border-indigo-500 font-medium flex items-center gap-2">
+                                                <i class="far fa-calendar-check text-indigo-500 text-lg"></i>
+                                                Appointment Confirmed
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- BENTO 2: Smart Upload -->
+                            <div class="bento-card bg-white border border-gray-100 shadow-xl shadow-gray-200/40 rounded-[2rem] p-8 flex flex-col relative overflow-hidden">
+                                <div class="w-12 h-12 bg-indigo-50 text-indigo-600 rounded-2xl flex items-center justify-center text-2xl mb-6">
+                                    <i class="fas fa-magic"></i>
+                                </div>
+                                <h3 class="text-2xl font-bold text-gray-900 mb-3">Effortless Ingestion</h3>
+                                <p class="text-gray-500 leading-relaxed">Upload property pictures and brochures. We automatically extract details and build the page seamlessly via AI extraction.</p>
+                                
+                                <div class="mt-auto pt-6 w-full flex justify-center">
+                                    <div class="w-full h-28 border-2 border-dashed border-indigo-200 rounded-2xl bg-indigo-50/50 flex flex-col items-center justify-center text-indigo-400 group-hover:bg-indigo-50 transition-colors">
+                                        <i class="fas fa-cloud-upload-alt mb-2 text-3xl"></i>
+                                        <span class="text-sm font-medium">Drop brochure & photos here</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- BENTO 3: LinkedIn -->
+                            <div class="bento-card bg-[#0A66C2] text-white shadow-xl shadow-blue-900/20 rounded-[2rem] p-8 flex flex-col relative overflow-hidden group">
+                                <div class="absolute -right-4 -top-4 text-white/10 text-[10rem] transform -rotate-12 transition-transform group-hover:rotate-0 duration-500">
+                                    <i class="fab fa-linkedin"></i>
+                                </div>
+                                <div class="relative z-10">
+                                    <div class="w-12 h-12 bg-white/20 backdrop-blur-md rounded-2xl flex items-center justify-center text-2xl mb-6">
+                                        <i class="fas fa-share-square"></i>
+                                    </div>
+                                    <h3 class="text-2xl font-bold mb-3">1-Click LinkedIn</h3>
+                                    <p class="text-white/90 leading-relaxed">Generate perfectly formatted social posts and publish to LinkedIn instantly to attract high-net-worth buyers.</p>
+                                </div>
+                                <div class="mt-auto glass-card border-none bg-white/10 p-5 rounded-xl relative z-10 flex gap-4 items-center transform group-hover:-translate-y-2 transition-transform duration-300">
+                                    <div class="w-10 h-10 rounded-full bg-white/30 flex-shrink-0"></div>
+                                    <div class="flex-1 space-y-2.5">
+                                        <div class="h-2 w-1/2 bg-white/30 rounded"></div>
+                                        <div class="h-2 w-3/4 bg-white/30 rounded"></div>
+                                        <div class="h-16 w-full bg-white/20 rounded mt-2"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- BENTO 4: Public Agency URL -->
+                            <div class="bento-card md:col-span-3 bg-gray-900 text-white shadow-2xl rounded-[2rem] p-8 md:p-12 flex flex-col md:flex-row items-center gap-8 overflow-hidden relative">
+                                <div class="absolute inset-0 bg-gradient-to-r from-gray-900 via-gray-800 to-indigo-900/40"></div>
+                                <div class="relative z-10 md:w-1/2">
+                                    <div class="w-12 h-12 bg-gray-800 border border-gray-700 rounded-2xl flex items-center justify-center text-2xl mb-6 text-indigo-400">
+                                        <i class="fas fa-link"></i>
+                                    </div>
+                                    <h3 class="text-3xl lg:text-4xl font-bold mb-4">Your Public Agency Portal</h3>
+                                    <p class="text-gray-400 text-lg leading-relaxed">Every agent gets a beautiful, public-facing URL showcasing all their active property listings in one stunning place.</p>
+                                </div>
+                                <div class="relative z-10 md:w-1/2 w-full h-full flex items-center justify-center">
+                                    <div class="w-full max-w-[320px] h-[240px] bg-white rounded-t-xl overflow-hidden shadow-2xl mt-8 md:mt-24 transform md:group-hover:-translate-y-6 transition-transform duration-500 border-4 border-b-0 border-gray-700">
+                                        <!-- Browser mock -->
+                                        <div class="bg-gray-100 px-3 py-2 flex items-center gap-2 border-b border-gray-200">
+                                            <div class="flex gap-1.5"><div class="w-3 h-3 rounded-full bg-red-400"></div><div class="w-3 h-3 rounded-full bg-yellow-400"></div><div class="w-3 h-3 rounded-full bg-green-400"></div></div>
+                                            <div class="bg-white flex-1 mx-4 rounded-md text-[10px] text-center py-1 text-gray-500 font-mono shadow-sm">boltrr.com/agency/premier</div>
+                                        </div>
+                                        <div class="p-5 bg-gradient-to-br from-indigo-50 to-white flex gap-4 items-center border-b border-gray-100">
+                                            <img src="https://i.pravatar.cc/100?img=5" class="w-12 h-12 rounded-full shadow-md border-2 border-white"/>
+                                            <div>
+                                                <div class="text-sm font-bold text-gray-800">Sarah Jenkins</div>
+                                                <div class="text-[10px] text-gray-500">Premium Real Estate</div>
+                                            </div>
+                                        </div>
+                                        <div class="p-4 grid grid-cols-2 gap-3">
+                                            <div class="h-24 bg-gray-200 rounded-lg bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=200&q=80')"></div>
+                                            <div class="h-24 bg-gray-200 rounded-lg bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=200&q=80')"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- CTA Section -->
+                    <div class="mt-20 mb-10">
+                        <div class="bg-gradient-to-br from-indigo-600 via-purple-600 to-indigo-800 rounded-[3rem] p-12 md:p-20 text-center relative overflow-hidden shadow-2xl shadow-indigo-600/30">
+                            <!-- Abstract blobs -->
+                            <div class="absolute top-0 right-0 w-80 h-80 bg-white/10 rounded-full blur-3xl transform translate-x-1/3 -translate-y-1/3"></div>
+                            <div class="absolute bottom-0 left-0 w-80 h-80 bg-black/10 rounded-full blur-3xl transform -translate-x-1/3 translate-y-1/3"></div>
+                            
+                            <div class="relative z-10 max-w-2xl mx-auto">
+                                <h2 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-6 leading-tight">Ready to close more deals?</h2>
+                                <p class="text-xl text-indigo-100 mb-10 leading-relaxed">Join thousands of modern real estate agents who use Boltrr to present properties and capture leads faster than ever.</p>
+                                
+                                <a href="#" class="inline-flex items-center justify-center px-10 py-5 bg-white text-indigo-600 rounded-full text-xl font-bold hover:bg-gray-50 hover:scale-105 transition-all shadow-xl gap-3">
+                                    Start for Free 
+                                    <i class="fas fa-rocket text-indigo-400"></i>
+                                </a>
+                                <p class="text-indigo-200 text-sm mt-6 font-medium">No credit card required. Setup takes seconds.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+		</main>
+	</div>
+
+	<footer class="relative border-t border-neutral-200 mt-10 py-6 text-center text-sm text-text-secondary">
+		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+			&copy; 2025 - Boltrr -
+			<a href="#" class="text-primary hover:underline">Privacy</a>
+		</div>
+	</footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script>
+		const menuToggle = document.getElementById('menu-toggle');
+		const menu = document.getElementById('menu');
+
+		menuToggle.addEventListener('click', () => {
+			menuToggle.classList.toggle('open');
+
+			if (menu.classList.contains('hidden')) {
+				menu.classList.remove('hidden');
+				requestAnimationFrame(() => {
+					menu.classList.remove('scale-y-0');
+					menu.classList.add('scale-y-100');
+				});
+			} else {
+				menu.classList.remove('scale-y-100');
+				menu.classList.add('scale-y-0');
+				setTimeout(() => menu.classList.add('hidden'), 300);
+			}
+		});
+	</script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const slider = document.getElementById('comparison-slider');
+            const beforeLayer = document.getElementById('before-image-layer');
+            const sliderHandle = document.getElementById('slider-handle');
+
+            if(!slider || !beforeLayer || !sliderHandle) return;
+
+            slider.addEventListener('input', (e) => {
+                const percentage = e.target.value;
+                beforeLayer.style.clipPath = `inset(0 ${100 - percentage}% 0 0)`;
+                sliderHandle.style.left = `${percentage}%`;
+            });
+        });
+    </script>
+</body>
+</html>
